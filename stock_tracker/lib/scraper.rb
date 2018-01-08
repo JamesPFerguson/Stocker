@@ -97,7 +97,7 @@ class Scraper
     index = 0 #index for stocks array
     stocks.css(".table-dark-row-cp").each do |columns|
       i = 1 #index for columns loop
-      stock = Stock.all[index] #assingns the current stock in the row to the stock variable
+      stock = Stock.all[index] #assigns the current stock in the row to the stock variable
       columns.css(".screener-body-table-nw").each do |column|
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
@@ -120,7 +120,7 @@ class Scraper
     #scrapes the light row
     stocks.css(".table-light-row-cp").each do |columns|
       i = 1 #index for columns loop
-      stock = Stock.all[index] #assingns the current stock in the row to the stock variable
+      stock = Stock.all[index] #assigns the current stock in the row to the stock variable
       columns.css(".screener-body-table-nw").each do |column|
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
@@ -147,26 +147,25 @@ class Scraper
     index = 0 #index for stocks array
     stocks.css(".table-dark-row-cp").each do |columns|
       i = 1 #index for columns loop
+      stock = Stock.all[index] #assigns the current stock in the row to the stock variable
       columns.css(".screener-body-table-nw").each do |column|
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
         case i
         when 5
-          Stock.all[index].float = text
+          stock.float = text
         when 6
-          Stock.all[index].insider_owns = text
+          stock.insider_owns = text
         when 7
-          Stock.all[index].insider_trans = text
+          stock.insider_trans = text
         when 8
-          Stock.all[index].inst_owns = text
+          stock.inst_owns = text
         when 9
-          Stock.all[index].inst_owns = text
+          stock.inst_trans = text
         when 10
-          Stock.all[index].inst_trans = text
-        when 11
-          Stock.all[index].float_short = text
+          stock.float_short = text
         when 12
-          Stock.all[index].avg_vol = text
+          stock.avg_vol = text
         end #ends case statement
         i += 1
       end #ends column loop
@@ -177,30 +176,29 @@ class Scraper
     #scrapes the light row
     stocks.css(".table-light-row-cp").each do |columns|
       i = 1 #index for columns loop
+      stock = Stock.all[index] #assignns the current stock in the row to the stock variable
       columns.css(".screener-body-table-nw").each do |column|
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
         case i
         when 5
-          Stock.all[index].float = text
+          stock.float = text
         when 6
-          Stock.all[index].insider_owns = text
+          stock.insider_owns = text
         when 7
-          Stock.all[index].insider_trans = text
+          stock.insider_trans = text
         when 8
-          Stock.all[index].inst_owns = text
+          stock.inst_owns = text
         when 9
-          Stock.all[index].inst_owns = text
+          stock.inst_trans = text
         when 10
-          Stock.all[index].inst_trans = text
-        when 11
-          Stock.all[index].float_short = text
+          stock.float_short = text
         when 12
-          Stock.all[index].avg_vol = text
+          stock.avg_vol = text
         end #ends case statement
         i += 1
       end #ends the column loop
-        index += 2 #increments the index so that it only hits light rows
+      index += 2 #increments the index so that it only hits light rows
     end #ends light row loop
 
   end #ends the valuation scrape method
