@@ -5,7 +5,8 @@ class Stock
 attr_accessor :ticker, :name, :price, :volume, :market_cap,
 :industry, :sector, :number, :change, :pe_ratio,
  :week_perf, :month_perf, :quart_perf, :half_perf, :year_perf,
- :ps_ratio, :pfcf_ratio, :eps_growth, :five_y_eps
+ :ps_ratio, :pfcf_ratio, :eps_growth, :five_y_eps, :float, :insider_owns,
+  :insider_trans, :inst_owns, :inst_trans, :float_short, :avg_vol
 
 
 
