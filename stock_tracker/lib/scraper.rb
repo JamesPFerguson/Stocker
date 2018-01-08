@@ -38,12 +38,11 @@ class Scraper
       when 10
         stock.change = text
       when 11
-        stock.change = text
+        stock.volume = text
       end
-      binding.pry
       i += 1
       end
-
+      Stock.stocks << stock
     binding.pry
   end
 end
