@@ -9,8 +9,9 @@ class Scraper
   def self.scrape_from_main
 
       stocks = Nokogiri::HTML(open("https://finviz.com/screener.ashx?v=111&f=fa_pe_low,fa_pfcf_low,fa_ps_u3,geo_usa,ta_perf_13wup,ta_perf2_4wup&ft=4&o=-perf26w"))
+      binding.pry
       #goes through each dark table row and retrieves the stock
-        stocks.css("#screener-content tr:nth-child(4)").each_with_index do |columns, index|
+        stocks.css("#screener-content tbody:nth-child(4)").each_with_index do |columns, index|
           if index != 0
             i = 1 #index for columns loop
             stock = Stock.new #creates a new stock for each time column loops
