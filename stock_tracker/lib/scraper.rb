@@ -104,53 +104,44 @@ class Scraper
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
         case i
         when 7
-          stock.ps_ratio = text
+          Stock.all[index].ps_ratio = text
         when 9
-          stock.pfcf_ratio = text
+          Stock.all[index].pfcf_ratio = text
         when 10
-          stock.eps_growth = text
+          Stock.all[index].eps_growth = text
         when 12
-          stock.5y_eps = text
+          Stock.all[index].five_y_eps = text
+        end #ends case statement
         i += 1
-      end
-      Stock.all << stock
-    end
+      end #ends column loop
+      index += 2 #increments the index twice so that it only hits dark rows
+    end #ends row loop
 
     #scrapes the light row
     stocks.css(".table-light-row-cp").each do |columns|
       i = 1 #index for columns loop
+      index = 1 #index for stocks array that only hits light rows
+      stock = Stock.new #creates a new stock for each time column loops
       columns.css(".screener-body-table-nw").each do |column|
         column
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
         case i
-        when 1
-          stock.number = text
-        when 2
-          stock.ticker = text
-        when 3
-          stock.name = text
-        when 4
-          stock.sector = text
-        when 5
-          stock.industry = text
         when 7
-          stock.market_cap = text
-        when 8
-          stock.pe_ratio = text
+          Stock.all[index].ps_ratio = text
         when 9
-          stock.price = text
+          Stock.all[index].pfcf_ratio = text
         when 10
-          stock.change = text
-        when 11
-          stock.volume = text
-        end #ends case
+          Stock.all[index].eps_growth = text
+        when 12
+          Stock.all[index].five_y_eps = text
+        end #ends case statement
         i += 1
-      end #ends row each
-      Stock.all << stock
-    end #ends complete each
+      end #ends the column loop
+        index += 2 #increments the index so that it only hits light rows
+    end #ends light row loop
 
-  end
+  end #ends the valuation scrape method
 
 end
 
