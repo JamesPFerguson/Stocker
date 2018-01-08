@@ -13,7 +13,17 @@ class Scraper
     self.scrape_valuation
     self.scrape_ownership
     self.scrape_performance
-    binding.pry
+    Stock.all.each do {|stock|
+      puts stock.name
+      puts stock.number
+      puts stock.perf_week
+      puts stock.perf_month
+      puts stock.perf_quarter
+      puts stock.perf_half
+      puts stock._perf_year
+      puts "===================================="
+      puts "===================================="
+    }
   end
 
   #scrapes the first page for key stock information
@@ -206,7 +216,7 @@ class Scraper
 
 
   def self.scrape_performance
-    stocks = Nokogiri::HTML(open("https://finviz.com/screener.ashx?v=131&f=fa_pe_low,fa_pfcf_low,fa_ps_u3,geo_usa,ta_perf_13wup,ta_perf2_4wup&ft=4&o=-perf26w"))
+    stocks = Nokogiri::HTML(open("https://finviz.com/screener.ashx?v=141&f=fa_pe_low,fa_pfcf_low,fa_ps_u3,geo_usa,ta_perf_13wup,ta_perf2_4wup&ft=3&o=-perf26w"))
 
     index = 0 #index for stocks array
     stocks.css(".table-dark-row-cp").each do |columns|
@@ -216,16 +226,16 @@ class Scraper
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
         case i
+        when 3
+          stock.perf_week= text
+        when 4
+          stock.perf_month = text
         when 5
-          stock.float = text
+          stock.perf_quarter = text
         when 6
-          stock.insider_owns = text
+          stock.perf_half = text
         when 7
-          stock.insider_trans = text
-        when 8
-          stock.inst_owns = text
-        when 12
-          stock.avg_vol = text
+          stock.perf_year = text
         end #ends case statement
         i += 1
       end #ends column loop
@@ -241,16 +251,16 @@ class Scraper
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
         case i
+        when 3
+          stock.perf_week= text
+        when 4
+          stock.perf_month = text
         when 5
-          stock.float = text
+          stock.perf_quarter = text
         when 6
-          stock.insider_owns = text
+          stock.perf_half = text
         when 7
-          stock.insider_trans = text
-        when 8
-          stock.inst_owns = text
-        when 12
-          stock.avg_vol = text
+          stock.perf_year = text
         end #ends case statement
         i += 1
       end #ends the column loop
