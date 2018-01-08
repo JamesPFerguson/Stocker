@@ -23,4 +23,8 @@ attr_accessor :ticker, :name, :price, :volume, :market_cap, :industry, :sector, 
   def self.create(number = nil)
   end
 
+  def number=(number)
+    @number = number.to_i
+  end
+
 end

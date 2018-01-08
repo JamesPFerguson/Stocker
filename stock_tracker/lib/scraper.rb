@@ -5,13 +5,14 @@ require_relative './stock.rb'
 
 class Scraper
 
-  #scrapes the first page for key stock information
+
 
   def self.full_scrape
     self.scrape_from_main
-    Stock.all.sort! {|x, y| x.number <=> y.number}
+    Stock.all.sort!{|x, y| x.number <=> y.number}
   end
 
+  #scrapes the first page for key stock information
   def self.scrape_from_main
 
     stocks = Nokogiri::HTML(open("https://finviz.com/screener.ashx?v=111&f=fa_pe_low,fa_pfcf_low,fa_ps_u3,geo_usa,ta_perf_13wup,ta_perf2_4wup&ft=4&o=-perf26w"))
