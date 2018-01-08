@@ -5,25 +5,12 @@ require_relative './stock.rb'
 
 class Scraper
 
-
-
   def self.full_scrape
     self.scrape_from_main
     Stock.all.sort!{|x, y| x.number <=> y.number}
     self.scrape_valuation
     self.scrape_ownership
     self.scrape_performance
-    Stock.all.each do {|stock|
-      puts stock.name
-      puts stock.number
-      puts stock.perf_week
-      puts stock.perf_month
-      puts stock.perf_quarter
-      puts stock.perf_half
-      puts stock._perf_year
-      puts "===================================="
-      puts "===================================="
-    }
   end
 
   #scrapes the first page for key stock information
