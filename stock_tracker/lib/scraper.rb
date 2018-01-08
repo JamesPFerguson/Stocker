@@ -13,6 +13,7 @@ class Scraper
     self.scrape_valuation
     self.scrape_ownership
     self.scrape_performance
+    binding.pry
   end
 
   #scrapes the first page for key stock information
@@ -51,7 +52,6 @@ class Scraper
         end
         i += 1
       end
-      binding.pry
     end
 
     #scrapes the light row
@@ -86,7 +86,6 @@ class Scraper
         i += 1
       end #ends row each
     end #ends complete each
-
   end
 
   #scrapes valuation stats
