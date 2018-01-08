@@ -7,8 +7,20 @@ attr_accessor :ticker, :name, :price, :volume, :market_cap, :industry, :sector, 
   def initialize
   end
 
-  def self.stocks
+  def self.all
     @@stocks
+  end
+
+
+  def self.find_by_number(number)
+    all.find{|stock| stock.number == number}
+  end
+
+  def self.find_or_create_by_number(number)
+    find_by_name(number) || create(number)
+  end
+
+  def self.create(number = nil)
   end
 
 end
