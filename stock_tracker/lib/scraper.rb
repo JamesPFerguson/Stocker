@@ -12,6 +12,7 @@ class Scraper
     Stock.all.sort!{|x, y| x.number <=> y.number}
     self.scrape_valuation
     self.scrape_ownership
+    self.scrape_performance
   end
 
   #scrapes the first page for key stock information
@@ -22,7 +23,7 @@ class Scraper
     #goes through each dark table row and retrieves the stock
     stocks.css(".table-dark-row-cp").each do |columns|
       i = 1 #index for columns loop
-      stock = Stock.new #creates a new stock for each time column loops
+      stock = Stock.create #creates a new stock for each time column loops
       columns.css(".screener-body-table-nw").each do |column|
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
@@ -50,13 +51,13 @@ class Scraper
         end
         i += 1
       end
-      Stock.all << stock
+      binding.pry
     end
 
     #scrapes the light row
     stocks.css(".table-light-row-cp").each do |columns|
       i = 1 #index for columns loop
-      stock = Stock.new #creates a new stock for each time column loops
+      stock = Stock.create #creates a new stock for each time column loops
       columns.css(".screener-body-table-nw").each do |column|
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
@@ -84,7 +85,6 @@ class Scraper
         end #ends case
         i += 1
       end #ends row each
-      Stock.all << stock
     end #ends complete each
 
   end
@@ -136,7 +136,7 @@ class Scraper
         end #ends case statement
         i += 1
       end #ends the column loop
-        index += 2 #increments the index so that it only hits light rows
+      index += 2 #increments the index so that it only hits light rows
     end #ends light row loop
 
   end #ends the valuation scrape method
@@ -203,9 +203,64 @@ class Scraper
 
   end #ends the valuation scrape method
 
+
+
+
+  def self.scrape_performance
+    stocks = Nokogiri::HTML(open("https://finviz.com/screener.ashx?v=131&f=fa_pe_low,fa_pfcf_low,fa_ps_u3,geo_usa,ta_perf_13wup,ta_perf2_4wup&ft=4&o=-perf26w"))
+
+    index = 0 #index for stocks array
+    stocks.css(".table-dark-row-cp").each do |columns|
+      i = 1 #index for columns loop
+      stock = Stock.all[index] #assigns the current stock in the row to the stock variable
+      columns.css(".screener-body-table-nw").each do |column|
+        text = column.text
+        #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
+        case i
+        when 5
+          stock.float = text
+        when 6
+          stock.insider_owns = text
+        when 7
+          stock.insider_trans = text
+        when 8
+          stock.inst_owns = text
+        when 12
+          stock.avg_vol = text
+        end #ends case statement
+        i += 1
+      end #ends column loop
+      index += 2 #increments the index twice so that it only hits dark rows
+    end #ends row loop
+
+    index = 1 #index for stocks array that only hits light rows
+    #scrapes the light row
+    stocks.css(".table-light-row-cp").each do |columns|
+      i = 1 #index for columns loop
+      stock = Stock.all[index] #assignns the current stock in the row to the stock variable
+      columns.css(".screener-body-table-nw").each do |column|
+        text = column.text
+        #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
+        case i
+        when 5
+          stock.float = text
+        when 6
+          stock.insider_owns = text
+        when 7
+          stock.insider_trans = text
+        when 8
+          stock.inst_owns = text
+        when 12
+          stock.avg_vol = text
+        end #ends case statement
+        i += 1
+      end #ends the column loop
+      index += 2 #increments the index so that it only hits light rows
+    end #ends light row loop
+
+  end
+
 end
 
 
-
-
-Scraper.full_scrape
+  Scraper.full_scrape

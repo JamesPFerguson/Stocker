@@ -7,7 +7,8 @@ attr_accessor :ticker, :name, :price, :volume, :market_cap,
 :industry, :sector, :number, :change, :pe_ratio,
  :week_perf, :month_perf, :quart_perf, :half_perf, :year_perf,
  :ps_ratio, :pfcf_ratio, :eps_growth, :five_y_eps, :float, :insider_owns,
-  :insider_trans, :inst_owns, :inst_trans, :float_short, :avg_vol
+  :insider_trans, :inst_owns, :inst_trans, :float_short, :avg_vol,
+  :perf_week, :perf_month, :perf_quart, :perf_half, :perf_year
 
 
 
@@ -18,16 +19,12 @@ attr_accessor :ticker, :name, :price, :volume, :market_cap,
     @@stocks
   end
 
-
-  def self.find_by_number(number)
-    all.find{|stock| stock.number == number}
+  def self.create
+    Stock.new.tap{|stock| stock.save}
   end
 
-  def self.find_or_create_by_number(number)
-    find_by_name(number) || create(number)
-  end
-
-  def self.create(number = nil)
+  def save
+    self.class.all << self
   end
 
   def number=(number)
