@@ -29,15 +29,15 @@ class Scraper
         stock.sector = text
       when 5
         stock.industry = text
-      when 6
-        stock.market_cap = text
       when 7
-        stock.pe_ratio = text
+        stock.market_cap = text
       when 8
-        stock.price = text
+        stock.pe_ratio = text
       when 9
-        stock.change = text
+        stock.price = text
       when 10
+        stock.change = text
+      when 11
         stock.change = text
       end
       binding.pry
