@@ -120,21 +120,21 @@ class Scraper
     #scrapes the light row
     stocks.css(".table-light-row-cp").each do |columns|
       i = 1 #index for columns loop
+      stock = Stock.all[index] #assingns the current stock in the row to the stock variable
       columns.css(".screener-body-table-nw").each do |column|
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
         case i
-        when 8
-          Stock.all[index].ps_ratio = text
+        when 7
+          stock.ps_ratio = text
+        when 10
+          stock.pfcf_ratio = text
         when 11
-          Stock.all[index].pfcf_ratio = text
-        when 12
-          Stock.all[index].eps_growth = text
-        when 14
-          Stock.all[index].five_y_eps = text
+          stock.eps_growth = text
+        when 13
+          stock.five_y_eps = text
         end #ends case statement
         i += 1
-        binding.pry
       end #ends the column loop
         index += 2 #increments the index so that it only hits light rows
     end #ends light row loop
@@ -144,9 +144,9 @@ class Scraper
   def self.scrape_ownership
     stocks = Nokogiri::HTML(open("https://finviz.com/screener.ashx?v=131&f=fa_pe_low,fa_pfcf_low,fa_ps_u3,geo_usa,ta_perf_13wup,ta_perf2_4wup&ft=4&o=-perf26w"))
 
+    index = 0 #index for stocks array
     stocks.css(".table-dark-row-cp").each do |columns|
       i = 1 #index for columns loop
-      index = 0 #index for stocks array
       columns.css(".screener-body-table-nw").each do |column|
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
@@ -173,10 +173,10 @@ class Scraper
       index += 2 #increments the index twice so that it only hits dark rows
     end #ends row loop
 
+    index = 1 #index for stocks array that only hits light rows
     #scrapes the light row
     stocks.css(".table-light-row-cp").each do |columns|
       i = 1 #index for columns loop
-      index = 1 #index for stocks array that only hits light rows
       columns.css(".screener-body-table-nw").each do |column|
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
