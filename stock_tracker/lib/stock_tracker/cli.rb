@@ -22,5 +22,22 @@ class StockTracker::CLI
     end
   end
 
+  def print_stock(stock)
+    puts "-----------Core Information-----------"
+    puts "#{stock.number} #{stock.name}"
+    puts "Stock Sector: #{stock.sector} \t\t Stock Industry: #{stock.industry}"
+    puts "Market Cap: #{stock.market_cap}"
+    puts ""
+    puts "-----------Value Metrics-----------"
+    puts "P/E ratio: #{stock.pe_ratio}"
+    puts "P/S ratio: #{stock.ps_ratio}"
+    puts "P/FCF ratio: #{stock.pfcf_ratio}"
+    puts "Current Year EPS Growth: #{stock.eps_growth}"
+    puts "Past 5 Years Annual EPS Growth: #{stock.eps_growth}"
+    puts ""
+    puts "-----------Ownership Metrics-----------"
+    puts "Float: #{stock.float}"
+    puts "Insider Ownership: #{ins_owns}"
+
 
 end
