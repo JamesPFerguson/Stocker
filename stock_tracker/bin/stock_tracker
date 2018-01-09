@@ -1,5 +1,0 @@
-#!/usr/bin/env ruby
-
-require_relative '../lib/stock_tracker'
-
-StockTracker::CLI.new.call
