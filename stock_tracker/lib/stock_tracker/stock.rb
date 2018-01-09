@@ -24,7 +24,7 @@ attr_accessor :ticker, :name, :price, :volume, :market_cap,
   end
 
   def self.find(num)
-    self.all[num]
+    self.all[num-1]
   end
 
   def save
@@ -34,5 +34,7 @@ attr_accessor :ticker, :name, :price, :volume, :market_cap,
   def number=(number)
     @number = number.to_i
   end
+
+
 
 end
