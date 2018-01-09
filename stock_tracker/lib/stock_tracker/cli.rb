@@ -27,6 +27,7 @@ class StockTracker::CLI
     puts "#{stock.number} #{stock.name}"
     puts "Stock Sector: #{stock.sector} \t\t Stock Industry: #{stock.industry}"
     puts "Market Cap: #{stock.market_cap}"
+    puts "Today's Volume: #{stock.volume}"
     puts ""
     puts "-----------Value Metrics-----------"
     puts "P/E ratio: #{stock.pe_ratio}"
@@ -37,7 +38,16 @@ class StockTracker::CLI
     puts ""
     puts "-----------Ownership Metrics-----------"
     puts "Float: #{stock.float}"
-    puts "Insider Ownership: #{ins_owns}"
+    puts "Insider Ownership: #{insider_owns}"
+    puts "6 Month Insider Ownership Change: #{insider_trans}"
+    puts "Institutional Ownership: #{stock.inst_owns}"
+    puts "3 Month Institutional Ownership Change: #{stock.inst_trans}"
+    puts "Float Short: #{stock.float_short}"
+    puts "Average Volume (3 Months): #{stock.avg_vol}"
+    puts ""
+    puts "-----------Performance Metrics-----------"
+
+  end
 
 
 end
