@@ -2,7 +2,7 @@ class StockTracker::Scraper
 
   def self.full_scrape
     self.scrape_from_main
-    Stock.all.sort!{|x, y| x.number <=> y.number}
+    StockTracker::Stock.all.sort!{|x, y| x.number <=> y.number}
     self.scrape_valuation
     self.scrape_ownership
     self.scrape_performance
@@ -16,7 +16,7 @@ class StockTracker::Scraper
     #goes through each dark table row and retrieves the stock
     stocks.css(".table-dark-row-cp").each do |columns|
       i = 1 #index for columns loop
-      stock = Stock.create #creates a new stock for each time column loops
+      stock = StockTracker::Stock.create #creates a new stock for each time column loops
       columns.css(".screener-body-table-nw").each do |column|
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
@@ -49,7 +49,7 @@ class StockTracker::Scraper
     #scrapes the light row
     stocks.css(".table-light-row-cp").each do |columns|
       i = 1 #index for columns loop
-      stock = Stock.create #creates a new stock for each time column loops
+      stock = StockTracker::Stock.create #creates a new stock for each time column loops
       columns.css(".screener-body-table-nw").each do |column|
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
@@ -88,7 +88,7 @@ class StockTracker::Scraper
     index = 0 #index for stocks array
     stocks.css(".table-dark-row-cp").each do |columns|
       i = 1 #index for columns loop
-      stock = Stock.all[index] #assigns the current stock in the row to the stock variable
+      stock = StockTracker::Stock.all[index] #assigns the current stock in the row to the stock variable
       columns.css(".screener-body-table-nw").each do |column|
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
@@ -111,7 +111,7 @@ class StockTracker::Scraper
     #scrapes the light row
     stocks.css(".table-light-row-cp").each do |columns|
       i = 1 #index for columns loop
-      stock = Stock.all[index] #assigns the current stock in the row to the stock variable
+      stock = StockTracker::Stock.all[index] #assigns the current stock in the row to the stock variable
       columns.css(".screener-body-table-nw").each do |column|
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
@@ -138,7 +138,7 @@ class StockTracker::Scraper
     index = 0 #index for stocks array
     stocks.css(".table-dark-row-cp").each do |columns|
       i = 1 #index for columns loop
-      stock = Stock.all[index] #assigns the current stock in the row to the stock variable
+      stock = StockTracker::Stock.all[index] #assigns the current stock in the row to the stock variable
       columns.css(".screener-body-table-nw").each do |column|
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
@@ -167,7 +167,7 @@ class StockTracker::Scraper
     #scrapes the light row
     stocks.css(".table-light-row-cp").each do |columns|
       i = 1 #index for columns loop
-      stock = Stock.all[index] #assignns the current stock in the row to the stock variable
+      stock = StockTracker::Stock.all[index] #assignns the current stock in the row to the stock variable
       columns.css(".screener-body-table-nw").each do |column|
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
@@ -203,7 +203,7 @@ class StockTracker::Scraper
     index = 0 #index for stocks array
     stocks.css(".table-dark-row-cp").each do |columns|
       i = 1 #index for columns loop
-      stock = Stock.all[index] #assigns the current stock in the row to the stock variable
+      stock = StockTracker::Stock.all[index] #assigns the current stock in the row to the stock variable
       columns.css(".screener-body-table-nw").each do |column|
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
@@ -228,7 +228,7 @@ class StockTracker::Scraper
     #scrapes the light row
     stocks.css(".table-light-row-cp").each do |columns|
       i = 1 #index for columns loop
-      stock = Stock.all[index] #assignns the current stock in the row to the stock variable
+      stock = StockTracker::Stock.all[index] #assignns the current stock in the row to the stock variable
       columns.css(".screener-body-table-nw").each do |column|
         text = column.text
         #This case statement assigns the appropriate attribute to a stock depending on which iteration of the loop we are in.
@@ -252,6 +252,3 @@ class StockTracker::Scraper
   end
 
 end
-
-
-  Scraper.full_scrape

@@ -23,6 +23,10 @@ attr_accessor :ticker, :name, :price, :volume, :market_cap,
     self.new.tap{|stock| stock.save}
   end
 
+  def self.find(num)
+    self.all[num]
+  end
+
   def save
     self.class.all << self
   end
