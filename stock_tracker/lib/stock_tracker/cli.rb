@@ -15,6 +15,16 @@ class StockTracker::CLI
 
     stock = StockTracker::Stock.find{input)
     self.print_stock(stock)
+
+    puts ""
+    puts "Would you like to see information on another stock? Enter Y or N"
+    input = gets.strip.downcase
+    if input == "y"
+      start
+    else
+      puts ""
+      puts "Thanks for using Stock Tracker."
+      exit
   end
 
   def print_list
