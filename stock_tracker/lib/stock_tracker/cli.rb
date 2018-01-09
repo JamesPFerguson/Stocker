@@ -14,6 +14,7 @@ class StockTracker::CLI
     input = gets.strip_to_i
 
     stock = StockTracker::Stock.find{input)
+    self.print_stock(stock)
   end
 
   def print_list
@@ -34,19 +35,23 @@ class StockTracker::CLI
     puts "P/S ratio: #{stock.ps_ratio}"
     puts "P/FCF ratio: #{stock.pfcf_ratio}"
     puts "Current Year EPS Growth: #{stock.eps_growth}"
-    puts "Past 5 Years Annual EPS Growth: #{stock.eps_growth}"
+    puts "Past 5 Years Annual EPS Growth: #{stock.five_y_eps}"
     puts ""
     puts "-----------Ownership Metrics-----------"
     puts "Float: #{stock.float}"
-    puts "Insider Ownership: #{insider_owns}"
-    puts "6 Month Insider Ownership Change: #{insider_trans}"
+    puts "Insider Ownership: #{stock.insider_owns}"
+    puts "6 Month Insider Ownership Change: #{stock.insider_trans}"
     puts "Institutional Ownership: #{stock.inst_owns}"
     puts "3 Month Institutional Ownership Change: #{stock.inst_trans}"
     puts "Float Short: #{stock.float_short}"
     puts "Average Volume (3 Months): #{stock.avg_vol}"
     puts ""
     puts "-----------Performance Metrics-----------"
-
+    puts "Week Performance: #{stock.perf_week}"
+    puts "Month Performance: #{stock.perf_month}"
+    puts "Quarter Performance: #{stock.perf_quarter}"
+    puts "Six Month Performance: #{stock.perf_half}"
+    puts "Year Performance: #{stock.perf_year}"
   end
 
 
