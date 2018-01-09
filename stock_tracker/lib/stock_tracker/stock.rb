@@ -1,4 +1,4 @@
-class Stock
+class StockTracker::Stock
 
   @@stocks = []
 
@@ -20,7 +20,7 @@ attr_accessor :ticker, :name, :price, :volume, :market_cap,
   end
 
   def self.create
-    Stock.new.tap{|stock| stock.save}
+    self.new.tap{|stock| stock.save}
   end
 
   def save

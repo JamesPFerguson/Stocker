@@ -1,9 +1,4 @@
-require 'nokogiri'
-require 'pry'
-require 'open-uri'
-require_relative './stock.rb'
-
-class Scraper
+class StockTracker::Scraper
 
   def self.full_scrape
     self.scrape_from_main
