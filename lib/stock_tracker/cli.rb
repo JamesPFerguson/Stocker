@@ -2,12 +2,23 @@ class StockTracker::CLI
 
   def call
     StockTracker::Scraper.full_scrape
+    puts ""
     puts "Welcome to Stock Tracker"
     puts""
-    self.start
+    input = nil
+    while input != "start" || input != "exit"
+      puts"Type 'start' to retrieve a list of stocks, or 'exit' to exit"
+      input = gets.strip
+    if input.downcase == "start"
+      self.start
+    elsif input.downcase == "exit"
+      exit
+    end
+  end
   end
 
   def start
+    puts ""
     puts "Below is a list of 20 stocks that qualify as underpriced based on a value composite. These stocks are listed in order of six month performance."
     puts ""
     self.print_list
